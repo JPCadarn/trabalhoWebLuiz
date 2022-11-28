@@ -24,7 +24,9 @@ CREATE TABLE produtos_midia (
 CREATE TABLE carrinho_itens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     produto_id INT NOT NULL REFERENCES produtos(id),
-    valor DECIMAL(15,2) NOT NULL
+    valor DECIMAL(15,2) NOT NULL,
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
 INSERT INTO produtos
