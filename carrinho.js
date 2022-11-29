@@ -16,8 +16,12 @@ $(document).on('click','.btnRemoverItemCarrinho', function (element) {
 			id: $(this).data('id')
 		}
 	});
-
-	location.reload();
+	for (let element of $(this).parents()) {
+		console.log(element.classList);
+		if ($(element).hasClass('card') && $(element).hasClass('cardCarrinho')) {
+			$(element).remove();
+		}
+	}
 });
 
 $('.btnAbrirCarrinho').on('click', function (element) {
@@ -28,7 +32,7 @@ $('.btnAbrirCarrinho').on('click', function (element) {
 	requestItensCarrinho.done(function (response) {
 		let html = '';
 		for (let item of JSON.parse(response)) {
-			html += '<div class="card">' +
+			html += '<div class="card cardCarrinho">' +
 				'<div class="card-image">' +
 				'<figure class="image is-16by9">' +
 				'<img src="images/'+item.capa+'" alt="Placeholder image">' +
