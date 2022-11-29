@@ -58,12 +58,23 @@ class Database
 
     public function update()
     {
-
     }
 
-    public function delete()
+    public function delete($tabela, $where = '', $parametros = [])
     {
+		$this->conectar();
 
+		if (!empty($where)) {
+			$where = 'WHERE ' . $where;
+		}
+
+		$query = "DELETE FROM $tabela $where";
+
+		$statement = $this->conexao->prepare($query);
+		$statement->execute($parametros);
+
+		$statement = null;
+		$this->fecharConexao();
     }
 
     private function conectar()
